@@ -9,9 +9,10 @@ users.use(cors());
 
 process.env.SECRET_KEY = "secret";
 
-users.get('/', (req, res) =>{
-  res.json({status: 'API WORKS'});
+users.get("/", (req, res) => {
+  res.json({ status: "API WORKS" });
 });
+
 // REGISTRO
 users.post("/register", (req, res) => {
   const today = new Date();
@@ -22,6 +23,7 @@ users.post("/register", (req, res) => {
     password: req.body.password,
     user_type: req.body.user_type,
     region: req.body.region,
+    marca: req.body.marca,
     created: today,
   };
   User.findOne({
@@ -51,10 +53,9 @@ users.post("/register", (req, res) => {
     });
 });
 
-
 // LOGIN
 users.post("/login", (req, res) => {
-  console.log('works');
+  console.log("works");
   User.findOne({
     where: {
       usuario: req.body.usuario,
