@@ -21,6 +21,9 @@ module.exports = db.sequelize.define(
     region: {
       type: Sequelize.STRING,
     },
+    marca: {
+      type: Sequelize.STRING,
+    },
     created: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
