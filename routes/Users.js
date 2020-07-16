@@ -45,14 +45,16 @@ users.post("/register", (req, res) => {
             res.send("error: " + err);
           });
       } else {
-        res.json({ error: "User already exists" });
+        return res.status(500).json({
+          ok: false,
+          err,
+        });
       }
     })
     .catch((err) => {
       res.send("error: " + err);
     });
 });
-
 
 // LOGIN
 users.post("/login", (req, res) => {
