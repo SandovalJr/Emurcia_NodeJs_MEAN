@@ -3,7 +3,6 @@ const express = require("express");
 const users = express.Router();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-
 const User = require("../models/User");
 users.use(cors());
 
@@ -11,6 +10,30 @@ process.env.SECRET_KEY = "secret";
 
 users.get("/", (req, res) => {
   res.json({ status: "API WORKS" });
+});
+
+
+// LISTAR USUARIOS
+users.get("/ListarUsuarios", (req, res) => {
+  var decoded = jwt.verify(
+    req.headers["authorization"],
+    process.env.SECRET_KEY
+  );
+  User.findAll({
+    where: {
+      marca: decoded.marca,
+    },
+  })
+    .then((user) => {
+      if (user) {
+        res.json(user);
+      } else {
+        res.send("User does not exist");
+      }
+    })
+    .catch((err) => {
+      res.send("error: " + err);
+    });
 });
 
 // REGISTRO
