@@ -146,10 +146,6 @@ users.get("/profile", (req, res) => {
 
 // REGRESAR INFORMACION DE EL ID SELECCIONADO PARA EDIRTAR
 users.get("/EditarUsuario/:id", (req, res) => {
-  var decoded = jwt.verify(
-    req.headers["authorization"],
-    process.env.SECRET_KEY
-  );
   User.findOne({
     where: {
       id: req.params.id,
