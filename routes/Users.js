@@ -38,10 +38,10 @@ users.get("/ListarUsuarios", (req, res) => {
 
 //Eliminar Usuario
 users.get("/ListarUsuarios/:id", (req, res) => {
-  var decoded = jwt.verify(
-    req.headers["authorization"],
-    process.env.SECRET_KEY
-  );
+  // var decoded = jwt.verify(
+  //   req.headers["authorization"],
+  //   process.env.SECRET_KEY
+  // );
   User.destroy({
     where: {
       id: req.params.id,
@@ -130,6 +130,29 @@ users.get("/profile", (req, res) => {
   User.findOne({
     where: {
       id: decoded.id,
+    },
+  })
+    .then((user) => {
+      if (user) {
+        res.json(user);
+      } else {
+        res.send("User does not exist");
+      }
+    })
+    .catch((err) => {
+      res.send("error: " + err);
+    });
+});
+
+// REGRESAR INFORMACION DE EL ID SELECCIONADO PARA EDIRTAR
+users.get("/EditarUsuario/:id", (req, res) => {
+  var decoded = jwt.verify(
+    req.headers["authorization"],
+    process.env.SECRET_KEY
+  );
+  User.findOne({
+    where: {
+      id: req.params.id,
     },
   })
     .then((user) => {
