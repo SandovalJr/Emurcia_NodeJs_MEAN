@@ -1,4 +1,4 @@
-const Sequelize = require("sequelize");
+const { Sequelize, Model, DataTypes } = require("sequelize");
 const db = {};
 const sequelize = new Sequelize("emurcia", "root", "", {
   host: "localhost",
@@ -15,6 +15,7 @@ const sequelize = new Sequelize("emurcia", "root", "", {
 });
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-
+db.Model = Model;
+db.DataTypes = DataTypes;
 
 module.exports = db;

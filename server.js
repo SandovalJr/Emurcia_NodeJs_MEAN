@@ -1,12 +1,10 @@
-  
-let express = require('express');
-let cors = require('cors');
-let bodyParser = require('body-parser');
+let express = require("express");
+let cors = require("cors");
+let bodyParser = require("body-parser");
 let app = express();
-const morgan = require('morgan');
+const morgan = require("morgan");
 // Settings
 let port = process.env.PORT || 3000; //puerto donde correrá
-
 
 app.use(cors());
 // app.use(
@@ -16,16 +14,14 @@ app.use(cors());
 // );
 
 // Middlewares
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 //app.use('/usuarios', Users);
 app.use(express.json());
 
 // Routes
-app.use('/api/user',require('./routes/Users'));
-
-
+app.use("/api/user", require("./routes/Users"));
 
 // Start listening
-app.listen(port, function() {
-    console.log('Server is running on port: ' + port);
+app.listen(port, function () {
+  console.log("Server is running on port: " + port);
 });

@@ -12,7 +12,6 @@ users.get("/", (req, res) => {
   res.json({ status: "API WORKS" });
 });
 
-
 // LISTAR USUARIOS
 users.get("/ListarUsuarios", (req, res) => {
   var decoded = jwt.verify(
@@ -26,6 +25,7 @@ users.get("/ListarUsuarios", (req, res) => {
   })
     .then((user) => {
       if (user) {
+        // res.json({ status: "API WORKS" })
         res.json(user);
       } else {
         res.send("User does not exist");
@@ -33,6 +33,25 @@ users.get("/ListarUsuarios", (req, res) => {
     })
     .catch((err) => {
       res.send("error: " + err);
+    });
+});
+
+//Eliminar Usuario
+users.get("/ListarUsuarios/:id", (req, res) => {
+  var decoded = jwt.verify(
+    req.headers["authorization"],
+    process.env.SECRET_KEY
+  );
+  User.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then(function (deletedRecords) {
+      res.status(200).json(deletedRecords);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
     });
 });
 
