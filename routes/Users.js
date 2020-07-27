@@ -20,7 +20,7 @@ users.get("/ListarUsuarios", (req, res) => {
   );
   User.findAll({
     where: {
-      marca: decoded.marca,
+      // marca: decoded.marca,
     },
   })
     .then((user) => {
@@ -49,6 +49,30 @@ users.get("/ListarUsuarios/:id", (req, res) => {
   })
     .then(function (deletedRecords) {
       res.status(200).json(deletedRecords);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+});
+
+// ACTUALIZAR USUARIO
+users.put("/ListarUsuarios/:id", (req, res) => {
+  const userData = {
+    usuario: req.body.usuario,
+    password: req.body.password,
+    user_type: req.body.user_type,
+    region: req.body.region,
+    marca: req.body.marca,
+    // created: today,
+  };
+  // console.log(userData);
+  User.update(userData, {
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then(function (updatedRecords) {
+      res.status(200).json(updatedRecords);
     })
     .catch(function (error) {
       res.status(500).json(error);

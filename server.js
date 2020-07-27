@@ -19,7 +19,15 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 // Routes
+
+// ADMINISTRADOR
+// USUARIOS 
 app.use("/api/user", require("./routes/Users"));
+
+// SUPERVISOR
+
+
+// VENDEDOR
 
 // Start listening
 app.listen(port, function () {
