@@ -18,11 +18,12 @@ app.use(morgan("dev"));
 //app.use('/usuarios', Users);
 app.use(express.json());
 
-// Routes
+//ROUTES--------------------------------------------------------------
 
 // ADMINISTRADOR
-// USUARIOS 
 app.use("/api/user", require("./routes/Users"));
+app.use("/api/autos", require("./routes/Autos"));
+
 
 // SUPERVISOR
 
