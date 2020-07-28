@@ -13,7 +13,7 @@ autos.get("/", (req, res) => {
 });
 
 // REGISTRO
-autos.post("/registerAutos", (req, res) => { 
+autos.post("/registerAutos", (req, res) => {
   const today = new Date();
 
   //res.send(console.log(req.body));
@@ -53,6 +53,25 @@ autos.post("/registerAutos", (req, res) => {
     })
     .catch((err) => {
       res.send("error: " + err);
+    });
+});
+
+//EliminarAuto
+autos.get("/EliminarAuto/:id_auto", (req, res) => {
+  // var decoded = jwt.verify(
+  //   req.headers["authorization"],
+  //   process.env.SECRET_KEY
+  // );
+  Auto.destroy({
+    where: {
+      id_auto: req.params.id_auto,
+    },
+  })
+    .then(function (deletedRecords) {
+      res.status(200).json(deletedRecords);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
     });
 });
 
