@@ -8,8 +8,12 @@ autos.use(cors());
 
 process.env.SECRET_KEY = "secret";
 
+autos.get("/", (req, res) => {
+  res.json({ status: "API AUTO WORKS" });
+});
+
 // REGISTRO
-autos.post("/registerAutos", (req, res) => {
+autos.post("/registerAutos", (req, res) => { 
   const today = new Date();
 
   //res.send(console.log(req.body));
@@ -34,14 +38,11 @@ autos.post("/registerAutos", (req, res) => {
     .then((auto) => {
       if (!auto) {
         Auto.create(AutosData)
-          .then((auto) => {
-            let token = jwt.sign(auto.dataValues, process.env.SECRET_KEY, {
-              expiresIn: 1440,
-            });
-            res.json({ token: token });
+          .then(function (newAuto) {
+            res.status(200).json(newAuto);
           })
-          .catch((err) => {
-            res.send("error: " + err);
+          .catch(function (error) {
+            res.status(500).json(error);
           });
       } else {
         return res.status(500).json({
