@@ -29,6 +29,7 @@ autos.post("/registerAutos", (req, res) => {
     cilindros_piezas: req.body.cilindros_piezas,
     created: today,
   };
+  console.log(req.body);
   Auto.findOne({
     where: {
       num_serie: req.body.num_serie,
@@ -56,6 +57,34 @@ autos.post("/registerAutos", (req, res) => {
     });
 });
 
+// ACTUALIZAR AUTO
+autos.put("/ActualizarAuto/:id_auto", (req, res) => {
+  const AutosData = {
+    Num_eco: req.body.Num_eco,
+    año: req.body.año,
+    ubicacion: req.body.ubicacion,
+    num_serie: req.body.num_serie,
+    marca_auto: req.body.marca_auto,
+    modelo: req.body.modelo,
+    placas: req.body.placas,
+    chofer_ruta: req.body.chofer_ruta,
+    cilindros_piezas: req.body.cilindros_piezas,
+    marca: req.body.marca,
+  };
+  console.log(AutosData);
+  Auto.update(AutosData, {
+    where: {
+      id_auto: req.params.id_auto,
+    },
+  })
+    .then(function (autoActualizado) {
+      res.status(200).json(autoActualizado);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+});
+
 //EliminarAuto
 autos.get("/EliminarAuto/:id_auto", (req, res) => {
   // var decoded = jwt.verify(
@@ -69,6 +98,17 @@ autos.get("/EliminarAuto/:id_auto", (req, res) => {
   })
     .then(function (deletedRecords) {
       res.status(200).json(deletedRecords);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+});
+
+// LISTAR AUTOS
+autos.get("/ListarAutos", (req, res) => {
+  Auto.findAll({})
+    .then(function (authors) {
+      res.status(200).json(authors);
     })
     .catch(function (error) {
       res.status(500).json(error);

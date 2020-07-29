@@ -36,6 +36,9 @@ module.exports = db.sequelize.define(
     cilindros_piezas: {
       type: Sequelize.INTEGER,
     },
+    marca: {
+      type: Sequelize.STRING,
+    },
     created: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
