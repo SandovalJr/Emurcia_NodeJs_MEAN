@@ -12,7 +12,7 @@ module.exports = db.sequelize.define(
     Num_eco: {
       type: Sequelize.INTEGER,
     },
-    año: {
+    anio: {
       type: Sequelize.INTEGER,
     },
     ubicacion: {

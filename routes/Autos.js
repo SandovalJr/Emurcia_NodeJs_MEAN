@@ -19,7 +19,7 @@ autos.post("/registerAutos", (req, res) => {
   //res.send(console.log(req.body));
   const AutosData = {
     Num_eco: req.body.Num_eco,
-    año: req.body.año,
+    anio: req.body.anio,
     ubicacion: req.body.ubicacion,
     num_serie: req.body.num_serie,
     marca_auto: req.body.marca_auto,
@@ -29,6 +29,7 @@ autos.post("/registerAutos", (req, res) => {
     cilindros_piezas: req.body.cilindros_piezas,
     created: today,
   };
+
   console.log(req.body);
   Auto.findOne({
     where: {
@@ -61,7 +62,7 @@ autos.post("/registerAutos", (req, res) => {
 autos.put("/ActualizarAuto/:id_auto", (req, res) => {
   const AutosData = {
     Num_eco: req.body.Num_eco,
-    año: req.body.año,
+    anio: req.body.anio,
     ubicacion: req.body.ubicacion,
     num_serie: req.body.num_serie,
     marca_auto: req.body.marca_auto,
@@ -112,6 +113,26 @@ autos.get("/ListarAutos", (req, res) => {
     })
     .catch(function (error) {
       res.status(500).json(error);
+    });
+});
+
+
+// REGRESAR INFORMACION DE EL ID SELECCIONADO PARA EDIRTAR
+autos.get("/ListarActualizarAuto/:id_auto", (req, res) => {
+  Auto.findOne({
+    where: {
+      id_auto: req.params.id_auto,
+    },
+  })
+    .then((Auto) => {
+      if (Auto) {
+        res.json(Auto);
+      } else {
+        res.send("Auto does not exist");
+      }
+    })
+    .catch((err) => {
+      res.send("error: " + err);
     });
 });
 
