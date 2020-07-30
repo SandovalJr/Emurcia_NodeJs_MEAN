@@ -15,7 +15,6 @@ autos.get("/", (req, res) => {
 // REGISTRO
 autos.post("/registerAutos", (req, res) => {
   const today = new Date();
-
   //res.send(console.log(req.body));
   const AutosData = {
     Num_eco: req.body.Num_eco,
@@ -28,9 +27,10 @@ autos.post("/registerAutos", (req, res) => {
     chofer_ruta: req.body.chofer_ruta,
     cilindros_piezas: req.body.cilindros_piezas,
     created: today,
+    marca: req.body.marca,
   };
 
-  console.log(req.body);
+  console.log('body', req.body);
   Auto.findOne({
     where: {
       num_serie: req.body.num_serie,
@@ -115,7 +115,6 @@ autos.get("/ListarAutos", (req, res) => {
       res.status(500).json(error);
     });
 });
-
 
 // REGRESAR INFORMACION DE EL ID SELECCIONADO PARA EDIRTAR
 autos.get("/ListarActualizarAuto/:id_auto", (req, res) => {
