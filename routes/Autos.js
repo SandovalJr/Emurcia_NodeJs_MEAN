@@ -30,7 +30,7 @@ autos.post("/registerAutos", (req, res) => {
     marca: req.body.marca,
   };
 
-  console.log('body', req.body);
+  console.log("body", req.body);
   Auto.findOne({
     where: {
       num_serie: req.body.num_serie,
@@ -106,8 +106,12 @@ autos.get("/EliminarAuto/:id_auto", (req, res) => {
 });
 
 // LISTAR AUTOS
-autos.get("/ListarAutos", (req, res) => {
-  Auto.findAll({})
+autos.get("/ListarAutos/:marca", (req, res) => {
+  Auto.findAll({
+    where: {
+      marca: req.params.marca,
+    },
+  })
     .then(function (authors) {
       res.status(200).json(authors);
     })
