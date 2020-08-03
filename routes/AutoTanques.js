@@ -27,5 +27,23 @@ autos_tanques.get("/ListarAutoTanques/:marca", (req, res) => {
     });
 });
 
+// REGRESAR INFORMACION DE EL ID SELECCIONADO PARA EDIRTAR
+autos_tanques.get("/ListarActualizarAutoTanque/:id_autoTanque", (req, res) => {
+  AutoTanque.findOne({
+    where: {
+      id_autoTanque: req.params.id_autoTanque,
+    },
+  })
+    .then((AutoTanque) => {
+      if (AutoTanque) {
+        res.json(AutoTanque);
+      } else {
+        res.send("AutoTanque does not exist");
+      }
+    })
+    .catch((err) => {
+      res.send("error: " + err);
+    });
+});
 
 module.exports = autos_tanques;
