@@ -20,15 +20,9 @@ app.use(express.json());
 
 //ROUTES--------------------------------------------------------------
 
-// ADMINISTRADOR
 app.use("/api/user", require("./routes/Users"));
 app.use("/api/autos", require("./routes/Autos"));
-
-
-// SUPERVISOR
-
-
-// VENDEDOR
+app.use("/api/auto_tanque", require("./routes/AutoTanques"));
 
 // Start listening
 app.listen(port, function () {
