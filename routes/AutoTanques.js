@@ -12,6 +12,21 @@ autos_tanques.get("/", (req, res) => {
   res.json({ status: "API AUTO TANQUE WORKS" });
 });
 
+//EliminarAuto
+autos_tanques.get("/EliminarAutoTanque/:id_autoTanque", (req, res) => {
+  AutoTanque.destroy({
+    where: {
+      id_autoTanque: req.params.id_autoTanque,
+    },
+  })
+    .then(function (deletedRecords) {
+      res.status(200).json(deletedRecords);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+});
+
 // LISTAR AUTOS TANQUES
 autos_tanques.get("/ListarAutoTanques/:marca", (req, res) => {
   AutoTanque.findAll({
