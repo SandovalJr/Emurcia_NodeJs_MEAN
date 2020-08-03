@@ -48,6 +48,10 @@ module.exports = db.sequelize.define(
     marca: {
       type: Sequelize.STRING,
     },
+    created: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW,
+    },
   },
   {
     timestamps: false,
