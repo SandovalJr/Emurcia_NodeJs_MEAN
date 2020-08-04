@@ -16,7 +16,7 @@ autos_tanques.get("/", (req, res) => {
 autos_tanques.post("/AgregarAutoTanque", (req, res) => {
   const today = new Date();
   //res.send(console.log(req.body));
-  const AutosData = {
+  const AutosTanqueData = {
     Num_eco: req.body.Num_eco,
     anio: req.body.anio,
     ubicacion: req.body.ubicacion,
@@ -33,14 +33,35 @@ autos_tanques.post("/AgregarAutoTanque", (req, res) => {
     created: today,
   };
 
-
+  console.log("body", req.body);
+  AutoTanque.findOne({
+    where: {
+      num_serie: req.body.num_serie,
+    },
+  })
+    //TODO bcrypt
+    .then((autoTanque) => {
+      if (!autoTanque) {
+        AutoTanque.create(AutosTanqueData)
+          .then(function (NewAutoTanque) {
+            res.status(200).json(NewAutoTanque);
+          })
+          .catch(function (error) {
+            res.status(500).json(error);
+          });
+      } else {
+        return res.status(500).json({
+          ok: false,
+          err,
+        });
+      }
+    })
+    .catch((err) => {
+      res.send("error ya existe el auto tanque: " + err);
+    });
 });
 
-
 // Actualizar AutoTanque
-
-
-
 
 //Eliminar Auto Tanque
 autos_tanques.get("/EliminarAutoTanque/:id_autoTanque", (req, res) => {
