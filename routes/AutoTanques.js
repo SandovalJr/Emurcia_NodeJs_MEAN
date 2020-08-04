@@ -12,7 +12,37 @@ autos_tanques.get("/", (req, res) => {
   res.json({ status: "API AUTO TANQUE WORKS" });
 });
 
-//EliminarAuto
+// Registrar AutoTanque
+autos_tanques.post("/AgregarAutoTanque", (req, res) => {
+  const today = new Date();
+  //res.send(console.log(req.body));
+  const AutosData = {
+    Num_eco: req.body.Num_eco,
+    anio: req.body.anio,
+    ubicacion: req.body.ubicacion,
+    num_serie: req.body.num_serie,
+    marca_auto: req.body.marca_auto,
+    modelo: req.body.modelo,
+    placas: req.body.placas,
+    chofer_ruta: req.body.chofer_ruta,
+    cilindros_piezas: req.body.cilindros_piezas,
+    observaciones: req.body.observaciones,
+    AutoTanque: req.body.AutoTanque,
+    Porcentaje_Salida_Llegada: req.body.Porcentaje_Salida_Llegada,
+    marca: req.body.marca,
+    created: today,
+  };
+
+
+});
+
+
+// Actualizar AutoTanque
+
+
+
+
+//Eliminar Auto Tanque
 autos_tanques.get("/EliminarAutoTanque/:id_autoTanque", (req, res) => {
   AutoTanque.destroy({
     where: {
