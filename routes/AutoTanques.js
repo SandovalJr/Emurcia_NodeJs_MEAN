@@ -32,7 +32,6 @@ autos_tanques.post("/AgregarAutoTanque", (req, res) => {
     marca: req.body.marca,
     created: today,
   };
-
   console.log("body", req.body);
   AutoTanque.findOne({
     where: {
@@ -62,6 +61,35 @@ autos_tanques.post("/AgregarAutoTanque", (req, res) => {
 });
 
 // Actualizar AutoTanque
+autos_tanques.put("/ActualizarAutoTanque/:id_autoTanque", (req, res) => {
+  const Autos_TanquesData = {
+    Num_eco: req.body.Num_eco,
+    anio: req.body.anio,
+    ubicacion: req.body.ubicacion,
+    num_serie: req.body.num_serie,
+    marca_auto: req.body.marca_auto,
+    modelo: req.body.modelo,
+    placas: req.body.placas,
+    chofer_ruta: req.body.chofer_ruta,
+    cilindros_piezas: req.body.cilindros_piezas,
+    observaciones: req.body.observaciones,
+    AutoTanque: req.body.AutoTanque,
+    Porcentaje_Salida_Llegada: req.body.Porcentaje_Salida_Llegada,
+    marca: req.body.marca,
+  };
+  console.log(Autos_TanquesData);
+  AutoTanque.update(Autos_TanquesData, {
+    where: {
+      id_autoTanque: req.params.id_autoTanque,
+    },
+  })
+    .then(function (autoActualizado) {
+      res.status(200).json(autoActualizado);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+});
 
 //Eliminar Auto Tanque
 autos_tanques.get("/EliminarAutoTanque/:id_autoTanque", (req, res) => {
