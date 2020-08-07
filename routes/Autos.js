@@ -106,19 +106,35 @@ autos.get("/EliminarAuto/:id_auto", (req, res) => {
 });
 
 // LISTAR AUTOS
-autos.get("/ListarAutos/:marca", (req, res) => {
+autos.get("/ListarAutos/:marca/:region", (req, res) => {
   Auto.findAll({
     where: {
       marca: req.params.marca,
+      ubicacion: req.params.region,
     },
   })
-    .then(function (authors) {
-      res.status(200).json(authors);
+    .then(function (autos) {
+      res.status(200).json(autos);
     })
     .catch(function (error) {
       res.status(500).json(error);
     });
 });
+
+// Listar autos admin en general de una marca
+// autos.get("/ListarAutos/:marca", (req, res) => {
+//   Auto.findAll({
+//     where: {
+//       marca: req.params.marca,
+//     },
+//   })
+//     .then(function (autos) {
+//       res.status(200).json(authors);
+//     })
+//     .catch(function (error) {
+//       res.status(500).json(error);
+//     });
+// });
 
 // REGRESAR INFORMACION DE EL ID SELECCIONADO PARA EDIRTAR
 autos.get("/ListarActualizarAuto/:id_auto", (req, res) => {
