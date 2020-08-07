@@ -107,10 +107,11 @@ autos_tanques.get("/EliminarAutoTanque/:id_autoTanque", (req, res) => {
 });
 
 // LISTAR AUTOS TANQUES
-autos_tanques.get("/ListarAutoTanques/:marca", (req, res) => {
+autos_tanques.get("/ListarAutoTanques/:marca/:region", (req, res) => {
   AutoTanque.findAll({
     where: {
       marca: req.params.marca,
+      ubicacion: req.params.region,
     },
   })
     .then(function (autoTanques) {
@@ -120,6 +121,21 @@ autos_tanques.get("/ListarAutoTanques/:marca", (req, res) => {
       res.status(500).json(error);
     });
 });
+
+// LISTAR AUTOS TANQUES ADMIN
+// autos_tanques.get("/ListarAutoTanques/:marca", (req, res) => {
+//   AutoTanque.findAll({
+//     where: {
+//       marca: req.params.marca,
+//     },
+//   })
+//     .then(function (autoTanques) {
+//       res.status(200).json(autoTanques);
+//     })
+//     .catch(function (error) {
+//       res.status(500).json(error);
+//     });
+// });
 
 // REGRESAR INFORMACION DE EL ID SELECCIONADO PARA EDIRTAR
 autos_tanques.get("/ListarActualizarAutoTanque/:id_autoTanque", (req, res) => {
