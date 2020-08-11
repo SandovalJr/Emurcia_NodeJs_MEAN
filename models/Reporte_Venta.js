@@ -73,7 +73,11 @@ module.exports = db.sequelize.define("reportes_ventas", {
   Comentarios: {
     type: Sequelize.STRING,
   },
-  fecha: {
+  createdAt: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW,
+  },
+  updatedAt: {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW,
   },
