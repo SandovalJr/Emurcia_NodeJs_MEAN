@@ -23,6 +23,7 @@ app.use(express.json());
 app.use("/api/user", require("./routes/Users"));
 app.use("/api/autos", require("./routes/Autos"));
 app.use("/api/auto_tanque", require("./routes/AutoTanques"));
+app.use("/api/Reportes_Ventas", require("./routes/Reportes_Ventas"));
 
 // Start listening
 app.listen(port, function () {
