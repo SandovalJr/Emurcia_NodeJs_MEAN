@@ -111,6 +111,46 @@ reportes_ventas.get("/ListarIdRV/:id_RV", (req, res) => {
     });
 });
 
+// ACTUALIZAR VENTA DATOS
+reportes_ventas.put("/ActualizarIDReporteVentas/:id_RV", (req, res) => {
+  const DataActualizada = {
+    marca: req.body.marca,
+    region: req.body.region,
+    auto: req.body.auto,
+    Cilidros_Vacios: req.body.Cilidros_Vacios,
+    Venta_Kilos: req.body.Venta_Kilos,
+    Precio_Prom: req.body.Precio_Prom,
+    Importe_Liquidar: req.body.Importe_Liquidar,
+    Recibe_caja_efectivo: req.body.Recibe_caja_efectivo,
+    credito_cilindro: req.body.credito_cilindro,
+    Importe_credito: req.body.Importe_credito,
+    Cel_Tel_Cliente: req.body.Cel_Tel_Cliente,
+    Litros_Consumo: req.body.Litros_Consumo,
+    INV_CIL: req.body.INV_CIL,
+    Equiv_KG: req.body.Equiv_KG,
+    T_INV_CIL: req.body.T_INV_CIL,
+    T_Equiv_KG: req.body.T_Equiv_KG,
+    Total_KilosV: req.body.Total_KilosV,
+    Total_CilindrosV: req.body.Total_CilindrosV,
+    Total_caja_efectivo: req.body.Total_caja_efectivo,
+    T_credito_cilindro: req.body.T_credito_cilindro,
+    T_Importe_credito: req.body.T_Importe_credito,
+    Comentarios: req.body.Comentarios,
+  };
+  console.log(DataActualizada);
+  Reporte_Venta.update(DataActualizada, {
+    where: {
+      id_RV: req.params.id_RV,
+    },
+  })
+    .then(function (autoActualizado) {
+      res.status(200).json(autoActualizado);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+});
+
 // LISTAR REGISTROS DE VENTA POR LA FECHA
 reportes_ventas.get(
   "/listarReportesVentas/:marca/:region/:createdAt",
