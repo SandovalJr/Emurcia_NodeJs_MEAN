@@ -60,7 +60,6 @@ reportes_ventas.post("/AgregarVentaAlReporte", (req, res) => {
         //   const NewReporte_Venta = Reporte_Venta
         Reporte_Venta.create(VentaData)
           .then(function (NewReporte_Venta) {
-            console.log("================= aqui");
             res.status(200).json(NewReporte_Venta);
           })
           .catch(function (error) {
@@ -78,19 +77,40 @@ reportes_ventas.post("/AgregarVentaAlReporte", (req, res) => {
     });
 });
 
+
+// Eliminar Venta
+reportes_ventas.get("/EliminarVenta/:id_RV", (req, res) => {
+  Reporte_Venta.destroy({
+    where: {
+      id_RV: req.params.id_RV,
+    },
+  })
+    .then(function (deletedRecords) {
+      res.status(200).json(deletedRecords);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+});
+
+
+
+
 // LISTAR REGISTROS DE VENTA POR LA FECHA
 reportes_ventas.get(
-  "/listarReportesVentas/:marca/:region",
+  "/listarReportesVentas/:marca/:region/:createdAt",
   (req, res) => {
     Reporte_Venta.findAll({
       where: {
         marca: req.params.marca,
         region: req.params.region,
-        // created: req.params.created,
+        createdAt: req.params.createdAt,
       },
     })
       .then(function (data) {
-        
+        console.log(createdAt);
+        console.log("dataaaaaaaaaaaaaaaaaaaaaaa");
+        console.log(data);
         res.status(200).json(data);
       })
       .catch(function (error) {
