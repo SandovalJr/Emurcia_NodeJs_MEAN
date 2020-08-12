@@ -77,7 +77,6 @@ reportes_ventas.post("/AgregarVentaAlReporte", (req, res) => {
     });
 });
 
-
 // Eliminar Venta
 reportes_ventas.get("/EliminarVenta/:id_RV", (req, res) => {
   Reporte_Venta.destroy({
@@ -93,8 +92,24 @@ reportes_ventas.get("/EliminarVenta/:id_RV", (req, res) => {
     });
 });
 
-
-
+// Listar por ID para update
+reportes_ventas.get("/ListarIdRV/:id_RV", (req, res) => {
+  Reporte_Venta.findOne({
+    where: {
+      id_RV: req.params.id_RV,
+    },
+  })
+    .then((DataDeVenta) => {
+      if (DataDeVenta) {
+        res.json(DataDeVenta);
+      } else {
+        res.send("La venta seleccionada does not exist");
+      }
+    })
+    .catch((err) => {
+      res.send("error: " + err);
+    });
+});
 
 // LISTAR REGISTROS DE VENTA POR LA FECHA
 reportes_ventas.get(
