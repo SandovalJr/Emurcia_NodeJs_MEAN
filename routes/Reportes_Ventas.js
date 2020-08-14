@@ -37,13 +37,6 @@ reportes_ventas.post("/AgregarVentaAlReporte", (req, res) => {
     Litros_Consumo: req.body.Litros_Consumo,
     INV_CIL: req.body.INV_CIL,
     Equiv_KG: req.body.Equiv_KG,
-    T_INV_CIL: req.body.T_INV_CIL,
-    T_Equiv_KG: req.body.T_Equiv_KG,
-    Total_KilosV: req.body.Total_KilosV,
-    Total_CilindrosV: req.body.Total_CilindrosV,
-    Total_caja_efectivo: req.body.Total_caja_efectivo,
-    T_credito_cilindro: req.body.T_credito_cilindro,
-    T_Importe_credito: req.body.T_Importe_credito,
     Comentarios: req.body.Comentarios,
     createdAt: today,
   };
@@ -128,13 +121,6 @@ reportes_ventas.put("/ActualizarIDReporteVentas/:id_RV", (req, res) => {
     Litros_Consumo: req.body.Litros_Consumo,
     INV_CIL: req.body.INV_CIL,
     Equiv_KG: req.body.Equiv_KG,
-    T_INV_CIL: req.body.T_INV_CIL,
-    T_Equiv_KG: req.body.T_Equiv_KG,
-    Total_KilosV: req.body.Total_KilosV,
-    Total_CilindrosV: req.body.Total_CilindrosV,
-    Total_caja_efectivo: req.body.Total_caja_efectivo,
-    T_credito_cilindro: req.body.T_credito_cilindro,
-    T_Importe_credito: req.body.T_Importe_credito,
     Comentarios: req.body.Comentarios,
   };
   console.log(DataActualizada);
@@ -155,6 +141,7 @@ reportes_ventas.put("/ActualizarIDReporteVentas/:id_RV", (req, res) => {
 reportes_ventas.get(
   "/listarReportesVentas/:marca/:region/:createdAt",
   (req, res) => {
+    console.log(req.params);
     Reporte_Venta.findAll({
       where: {
         marca: req.params.marca,
@@ -163,7 +150,6 @@ reportes_ventas.get(
       },
     })
       .then(function (data) {
-        console.log(createdAt);
         console.log("dataaaaaaaaaaaaaaaaaaaaaaa");
         console.log(data);
         res.status(200).json(data);
