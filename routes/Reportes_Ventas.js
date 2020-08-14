@@ -150,7 +150,6 @@ reportes_ventas.get(
       },
     })
       .then(function (data) {
-        console.log("dataaaaaaaaaaaaaaaaaaaaaaa");
         console.log(data);
         res.status(200).json(data);
       })
